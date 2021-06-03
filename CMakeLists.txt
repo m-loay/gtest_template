@@ -25,8 +25,7 @@ configure_file ("${PROJECT_SOURCE_DIR}/KalmanConfig.h.in"
                 "${KCONFIG_INCLIDE_DIR}/KalmanConfig.h")
 
 # #set build type to debug and C++ standard to 11
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_STANDARD 17) 
+set(CMAKE_CXX_STANDARD 11) 
 
 # add the binary tree to the search path for include files
 # so that we will find KalmanConfig.h
@@ -40,6 +39,7 @@ include_directories ("${KFAPP_INCLIDE_DIR}")
 include_directories ("${TEST_CASES_INCLIDE_DIR}")
 
 if(USE_APP_MODE)
+    message("Use APP Mode")
     #Add Tools sub-directory
     add_subdirectory(${TOOLS_INCLIDE_DIR})
     list(APPEND EXTRA_LIBS tools)
@@ -91,7 +91,7 @@ elseif(USE_UNIT_TESTING)
     target_link_libraries (gtest PUBLIC testCases)
     target_link_libraries (gtest PUBLIC tools)
     target_link_libraries (gtest PUBLIC kfApp)
-    target_link_libraries(gtest PUBLIC GTest::gtest GTest::gtest_main)
+    target_link_libraries(gtest PUBLIC ${GTEST_BOTH_LIBRARIES})
     
     #add the testing
     add_test(NAME gtest COMMAND gtest)

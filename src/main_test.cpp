@@ -18,27 +18,27 @@
 using namespace std;
 using namespace Eigen;
 
-TEST(KFTest,linearFilter)
+TEST(linearFilter,linearFilter)
 {
     EXPECT_EQ(linearFilter(),true);
 }
 
-TEST(KFTest,trackLinearFilter)
+TEST(trackLinearFilter,trackLinearFilter)
 {
     EXPECT_EQ(trackLinearFilter(),true);
 }
 
-TEST(EKFTest,CalculateJacobian)
+TEST(CalculateJacobian,CalculateJacobian)
 {
     EXPECT_EQ(CalculateJacobian(),true);
 }
 
-TEST(EKFTest,trackEKF)
+TEST(trackEKF,trackEKF)
 {
     EXPECT_EQ(trackEKF(),true);
 }
 
-TEST(RMSE,calculateRMSE)
+TEST(calculateRMSE,calculateRMSE)
 {
     EXPECT_EQ(calculateRMSE(),true);
 }
