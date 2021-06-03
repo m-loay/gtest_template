@@ -59,6 +59,14 @@ if(USE_APP_MODE)
     target_link_libraries (kf PUBLIC ${EXTRA_LIBS} ${PCL_LIBRARIES})
     
 elseif(USE_UNIT_TESTING)
+
+    message("Use unit testing Mode")
+    enable_testing()
+
+    #Find Gtest lib and include the directories
+    find_package(GTest REQUIRED)
+    include_directories(${GTEST_INCLUDE_DIRS})
+
     #Add Tools sub-directory
     add_subdirectory(${TOOLS_INCLIDE_DIR})
     list(APPEND EXTRA_LIBS tools)
@@ -78,7 +86,9 @@ elseif(USE_UNIT_TESTING)
 	list(APPEND EXTRA_INCLUDES "${KFLIB_INCLIDE_DIR}")
 
     #compile the source code and link it with external libraries
-    add_executable(kf src/main.cpp)
-    target_include_directories(kf PUBLIC ${EXTRA_INCLUDES})
-    target_link_libraries (kf PUBLIC ${EXTRA_LIBS} ${PCL_LIBRARIES})
+	#compile the source code and link it with external libraries
+	add_executable(gtest main_test.cpp)
+	target_include_directories(gtest PUBLIC ${EXTRA_INCLUDES})
+	target_link_libraries (gtest ${GTEST_BOTH_LIBRARIES} ${EXTRA_LIBS} Eigen3::Eigen)
+	add_test(NAME gtest COMMAND gtest)
 endif()
