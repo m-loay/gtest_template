@@ -1,3 +1,3 @@
-#define USE_APP_MODE
-/* #undef USE_UNIT_TESTING */
+/* #undef USE_APP_MODE */
+#define USE_UNIT_TESTING
 

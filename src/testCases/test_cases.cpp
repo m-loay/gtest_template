@@ -26,6 +26,7 @@
 #include <math.h>
 #include"test_cases.h"
 #include "kalmanFilter.h"
+#include "tools.h"
 
 Eigen::VectorXd g_t1 (const Eigen::Ref<const Eigen::VectorXd>& mean, const void *p_args=NULL);
 Eigen::MatrixXd g_t1_prime (const Eigen::Ref<const Eigen::VectorXd>& mean, const void *p_args=NULL);
@@ -506,7 +507,7 @@ bool calculateRMSE(void)
      **********************************************/
     std::vector<Eigen::VectorXd> estimations;
     std::vector<Eigen::VectorXd> ground_truth;
-    // Tools tools;
+    Tools tools;
 
     // the input list of estimations
     Eigen::VectorXd e(4);
@@ -529,8 +530,8 @@ bool calculateRMSE(void)
     /*******************************************************************************
      *  Calculate the RMSE                                                    *
      *******************************************************************************/
-        Eigen::VectorXd rmse(4);
-    // rmse = tools.CalculateRMSE(estimations, ground_truth);
+    Eigen::VectorXd rmse(4);
+    rmse = tools.CalculateRMSE(estimations, ground_truth);
 
     /*******************************************************************************
      *  Set correct Answer                                                         *

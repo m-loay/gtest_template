@@ -85,10 +85,14 @@ elseif(USE_UNIT_TESTING)
     #Add Kalman Filter library sub-directory
 	list(APPEND EXTRA_INCLUDES "${KFLIB_INCLIDE_DIR}")
 
-    #compile the source code and link it with external libraries
 	#compile the source code and link it with external libraries
-	add_executable(gtest main_test.cpp)
-	target_include_directories(gtest PUBLIC ${EXTRA_INCLUDES})
-	target_link_libraries (gtest ${GTEST_BOTH_LIBRARIES} ${EXTRA_LIBS} Eigen3::Eigen)
-	add_test(NAME gtest COMMAND gtest)
+    add_executable(gtest src/main_test.cpp)
+    target_include_directories(gtest PUBLIC ${EXTRA_INCLUDES})
+    target_link_libraries (gtest PUBLIC testCases)
+    target_link_libraries (gtest PUBLIC tools)
+    target_link_libraries (gtest PUBLIC kfApp)
+    target_link_libraries(gtest PUBLIC GTest::gtest GTest::gtest_main)
+    
+    #add the testing
+    add_test(NAME gtest COMMAND gtest)
 endif()
