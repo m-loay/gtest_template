@@ -1,12 +1,4 @@
 #define _USE_MATH_DEFINES
-/* \author Aaron Brown */
-// Create simple 3d highway enviroment using PCL
-// for exploring self-driving car sensors
-
-// #include "KalmanConfig.h"
-// #ifdef USE_EKF
-// #include "kfApp.h"
-// #endif
 #include<iostream>
 #include "tools.h"
 #include "kfApp.h"

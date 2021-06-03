@@ -10,8 +10,8 @@ set(TEST_CASES_INCLIDE_DIR ${CMAKE_SOURCE_DIR}/src/testCases)
 set(KFH_INCLIDE_DIR ${CMAKE_SOURCE_DIR}/src/kfheader)
 
 # Use simulation  testing mode or Unit testing
-option (USE_APP_MODE "Use APP Mode" ON )
-option (USE_UNIT_TESTING "Use Unit testing Mode" OFF)
+option (USE_APP_MODE "Use APP Mode" OFF )
+option (USE_UNIT_TESTING "Use Unit testing Mode" ON)
   
 #find the pacakges required for eigen and save directory
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
@@ -59,5 +59,26 @@ if(USE_APP_MODE)
     target_link_libraries (kf PUBLIC ${EXTRA_LIBS} ${PCL_LIBRARIES})
     
 elseif(USE_UNIT_TESTING)
+    #Add Tools sub-directory
+    add_subdirectory(${TOOLS_INCLIDE_DIR})
+    list(APPEND EXTRA_LIBS tools)
+    list(APPEND EXTRA_INCLUDES "${TOOLS_INCLIDE_DIR}")
 
+    #Add kfApp sub-directory
+    add_subdirectory(${KFAPP_INCLIDE_DIR})
+    list(APPEND EXTRA_LIBS kfApp)
+    list(APPEND EXTRA_INCLUDES "${KFAPP_INCLIDE_DIR}")
+
+    #Add kfApp sub-directory
+    add_subdirectory(${TEST_CASES_INCLIDE_DIR})
+    list(APPEND EXTRA_LIBS testCases)
+    list(APPEND EXTRA_INCLUDES "${TEST_CASES_INCLIDE_DIR}")
+
+    #Add Kalman Filter library sub-directory
+	list(APPEND EXTRA_INCLUDES "${KFLIB_INCLIDE_DIR}")
+
+    #compile the source code and link it with external libraries
+    add_executable(kf src/main.cpp)
+    target_include_directories(kf PUBLIC ${EXTRA_INCLUDES})
+    target_link_libraries (kf PUBLIC ${EXTRA_LIBS} ${PCL_LIBRARIES})
 endif()
