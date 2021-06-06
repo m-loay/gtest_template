@@ -37,7 +37,7 @@ so it can track the object position.
     option (USE_UNIT_TESTING "Use Unit testing Mode" ON)
 
 5. generate the make file: `cmake .. -G "MinGW Makefiles"`
-6. compile: `path to compiler\TDM-GCC-64\bin\mingw32-make`
+6. compile: `cmake --build . --config Debug --target all -j 10 --`
 7. Run it: `kf.exe` or `gtest.exe`
 
 ## Editor Settings
